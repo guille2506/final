@@ -379,7 +379,7 @@ footer ul li a:hover {
   clear: both;
   display: table;
   position: relative;
-  overflow: hidden;
+  /* overflow: hidden; */
   z-index: 1;
   background: -moz-linear-gradient(
     165deg,
@@ -1760,6 +1760,19 @@ select option {
 }
 
 
+.scrooling{
+  overflow: hidden;
+  height: 50vh;
+  overflow-y: auto!important;
+}
+
+@media (max-width: 767px) {
+  .scrooling{
+    
+    height: auto;
+    overflow: none;
+  }
+}
 
 
 /*llegaste al final

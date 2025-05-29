@@ -75,6 +75,7 @@ function obtenerOraciones($idempresa, $nro_bloque) {
                                 <div id="progressbar-value" style="background: #28a745; height: 100%; width: 0%; border-radius: 4px; transition: width 0.3s;"></div>
                             </div>
                         </div>
+                        <div class="scrooling">
                         <form id="wrapped" method="POST">
                             <input type="hidden" id="idempresa" value="<?= htmlspecialchars($id_empresa) ?>">
                             <input type="hidden" id="nombreempresa" value="<?= htmlspecialchars($nombre_empresa) ?>">
@@ -155,6 +156,7 @@ function obtenerOraciones($idempresa, $nro_bloque) {
                                 <button type="submit" name="process" class="submit">Enviar</button>
                             </div>
                         </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -212,9 +214,9 @@ function setDataForms(){
         filasArr.forEach(element => { 
             if(element != "||" && element != ""){
                 elem = element.split("||")
-                if(! elem[0].includes("bloque") && ! elem[0].includes("respuestaLibre")){
+                if(! elem[0].includes("bloque") && ! elem[0].includes("texta")){
                     BuscarActivarSelect(elem[0],elem[1])
-                }else if (elem[0].includes("respuestaLibre")){
+                }else if (elem[0].includes("texta")){
                     BuscarActivarTextArea(elem[0],elem[1])
                 }else{
                     BuscarActivarOption(elem[0],elem[1])
