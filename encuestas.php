@@ -112,7 +112,7 @@ function obtenerOraciones($idempresa, $nro_bloque) {
                                             $nro_bloque++;
                                             $oraciones = obtenerOraciones($id_empresa, $nro_bloque);
                                             $oraciones = array_slice($oraciones, 1);
-                                            $chunked = array_chunk($oraciones, 6);
+                                            $chunked = array_chunk($oraciones,8);
                                             foreach ($chunked as $grupo) {
                                                 echo "<div class='step'>";
                                                 echo "<h3 class='main_question'><strong>$stepCount</strong> $titulo</h3>";
@@ -204,7 +204,7 @@ function setDataForms(){
             method: 'POST',
             body: formData
         })
-        .then(response => response.json()) // <-- porque devolvemos JSON
+        .then(response => response.json()) 
         .then(result => {
         optionData = result.data;
         
@@ -240,7 +240,7 @@ $(document).ready(function () {
         $(".backward").toggle(index > 0);
         $(".forward").toggle(index < steps.length - 1);
         $(".submit").toggle(index === steps.length - 1);
-        updateProgressBar(index); // <-- Esto actualiza la barra
+        updateProgressBar(index); // 
     }
 
     function validateStep(index) {
@@ -288,7 +288,7 @@ $(document).ready(function () {
 </script>
 
 <script>
-document.getElementById("wrapped").addEventListener("submit", function(e) {
+document.getElementById("wrapped").addEventListener("submit", function (e) {
     e.preventDefault();
 
     const datos = {
@@ -303,37 +303,36 @@ document.getElementById("wrapped").addEventListener("submit", function(e) {
 
     fetch("saveSurveyed.php", {
         method: "POST",
-        headers: {"Content-Type": "application/x-www-form-urlencoded"},
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams(datos)
     }).then(() => {
         const bloquesRespuestas = {};
         const pasos = document.querySelectorAll(".step");
 
-pasos.forEach((bloque) => {
-  const titulo = bloque.querySelector("h3.main_question")?.textContent.trim() || "";
-  const match = titulo.match(/^\d+\s+(.*)/); 
-  const nombreBloque = match ? match[1] : null;
+        pasos.forEach((bloque) => {
+            const titulo = bloque.querySelector("h3.main_question")?.textContent.trim() || "";
+            const match = titulo.match(/^\d+\s+(.*)/);
+            const nombreBloque = match ? match[1] : null;
 
-  if (!nombreBloque || nombreBloque === "Datos del encuestado") return;
+            if (!nombreBloque || nombreBloque === "Datos del encuestado") return;
 
-  if (!bloquesRespuestas[nombreBloque]) {
-    bloquesRespuestas[nombreBloque] = { respuestas: [], texto: "" };
-  }
+            if (!bloquesRespuestas[nombreBloque]) {
+                bloquesRespuestas[nombreBloque] = { respuestas: [], texto: "" };
+            }
 
-  const radios = bloque.querySelectorAll("input[type='radio']:checked");
-  radios.forEach(r => bloquesRespuestas[nombreBloque].respuestas.push(r.value));
+            const radios = bloque.querySelectorAll("input[type='radio']:checked");
+            radios.forEach(r => bloquesRespuestas[nombreBloque].respuestas.push(r.value));
 
-  const textarea = bloque.querySelector("textarea");
-  if (textarea && textarea.value.trim()) {
-    bloquesRespuestas[nombreBloque].texto = textarea.value.trim();
-  }
-});
+            const textarea = bloque.querySelector("textarea");
+            if (textarea && textarea.value.trim()) {
+                bloquesRespuestas[nombreBloque].texto = textarea.value.trim();
+            }
+        });
 
-
-        Object.entries(bloquesRespuestas).forEach(([nombreBloque, datosBloque]) => {
-            fetch("saveAnswers.php", {
+        const promesas = Object.entries(bloquesRespuestas).map(([nombreBloque, datosBloque]) => {
+            return fetch("saveAnswers.php", {
                 method: "POST",
-                headers: {"Content-Type": "application/x-www-form-urlencoded"},
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 body: new URLSearchParams({
                     nombrebloque: nombreBloque,
                     bloque: JSON.stringify(datosBloque.respuestas),
@@ -342,30 +341,32 @@ pasos.forEach((bloque) => {
             });
         });
 
-        showThankYouModal();
+        Promise.all(promesas).then(() => {
+            fetch('classes/Session.php', {
+                method: 'POST',
+                body: new URLSearchParams({ d: "1" })
+            });
+
+            let realizadas = parseInt(localStorage.getItem("entrevistas_realizadas") || "0");
+            let total = parseInt(localStorage.getItem("total_entrevistas") || "0");
+            realizadas++;
+            localStorage.setItem("entrevistas_realizadas", realizadas);
+
+            window.onbeforeunload = null;
+
+            if (realizadas < total) {
+                alert("Encuesta guardada. A continuación, se abrirá una nueva entrevista.");
+                window.location.href = window.location.pathname + window.location.search;
+            } else {
+                alert("¡Gracias! Se han completado todas las entrevistas.");
+                localStorage.removeItem("total_entrevistas");
+                localStorage.removeItem("entrevistas_realizadas");
+                window.location.href = "index.php";
+            }
+        });
     });
 });
 
-function showThankYouModal() {
-    alert("¡Gracias por participar!");
-    window.location.href = "index.php";
-}
-function SetValueSession(id,data){
-    console.log(id)
-
-    const formData = new FormData();
-        formData.append('s', id +"-"+ data);
-
-        fetch('classes/Session.php', {
-            method: 'POST',
-            body: formData
-        });   
-}
-window.onbeforeunload = function (event) {
-    event.preventDefault(); // Esto es necesario para que la alerta funcione
-    event.returnValue = ''; // Esto es necesario para mostrar el mensaje en Chrome
-    return '¿Estás seguro de que quieres actualizar la página? Puedes perder datos.';
-};
 </script>
 
 </body>

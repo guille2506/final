@@ -60,17 +60,8 @@ strong {
 }
 label {
   font-weight: 400;
-<<<<<<< HEAD
   margin-bottom: 3px;
   color: #ccc;
-=======
-  margin-bottom: 8px;
-  color: #000000;
-  background-color: #ffffff7e;
-  padding: 8px 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  font-size: 18px;
->>>>>>> 2292afaebbd38f64673c80b86a46c5eb0f0effcd
 }
 hr {
   margin: 30px 0 30px 0;
@@ -94,13 +85,9 @@ a {
 }
 a:hover,
 a:focus {
-<<<<<<< HEAD
   color: #fff;
   text-decoration: none;
   outline: none;
-=======
- background-color: #2b3fc4;
->>>>>>> 2292afaebbd38f64673c80b86a46c5eb0f0effcd
 }
 a.animated_link {
   position: relative;
@@ -1733,48 +1720,4 @@ body.style_2 {
     padding: 10px;
   }
 }
-<<<<<<< HEAD
-=======
-
-
-
-.fl-label {
-  opacity: 1 !important;
-  visibility: visible !important;
-}
-
-
-select option {
-  background-color: #f0f0f0;
-  color: #222;
-}
-
-.separacion-arriba {
-  padding-top: 40px;
-}
-
-@media (max-width: 767px) {
-  .separacion-arriba {
-    padding-top: 60px;
-  }
-}
-
-
-.scrooling{
-  overflow: hidden;
-  height: 50vh;
-  overflow-y: auto!important;
-}
-
-@media (max-width: 767px) {
-  .scrooling{
-    
-    height: auto;
-    overflow: none;
-  }
-}
-
-
-/*llegaste al final
->>>>>>> 2292afaebbd38f64673c80b86a46c5eb0f0effcd
 

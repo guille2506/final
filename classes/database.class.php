@@ -1,10 +1,10 @@
 <?php
 class DataBase{
 
-	private $BaseDatos = 'u164090359_pp4_cervantes';
-	private $Servidor = '127.0.0.1:3306';
-	private $Usuario = 'u164090359_pp4_user';
-	private $Clave = 'PP4_password123';
+	private $BaseDatos = 'test';
+	private $Servidor = 'localhost';
+	private $Usuario = 'root';
+	private $Clave = '';
 
 
 

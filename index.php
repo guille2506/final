@@ -122,11 +122,6 @@ foreach ($empresas as $index => $empresa) {
 ?>
 
 <script>
-// window.onload = function () {
-//     const preloader = document.getElementById("preloader");
-//     preloader.classList.add("fade-out");
-// };
-
 function verificarClave() {
     const clave = document.getElementById("clave").value;
     const mensaje = document.getElementById("mensaje");
@@ -152,27 +147,59 @@ function verificarClave() {
 
 function mostrarEmpresa(id) {
     document.getElementById("contrasena_container").style.display = "none";
+
     const empresaDiv = document.getElementById("empresa");
     const contenido = document.getElementById("empresa" + id);
+
     if (contenido) {
-        empresaDiv.innerHTML = contenido.innerHTML;
+        empresaDiv.innerHTML = "";
+
+        const clonado = contenido.cloneNode(true);
+        clonado.style.display = "block";
+
+        empresaDiv.appendChild(clonado);
+
+        const inputEntrevistas = document.createElement("div");
+        inputEntrevistas.id = "selector-entrevistas";
+        inputEntrevistas.innerHTML = `
+            <label for="total_entrevistas" style="font-weight: bold; display: block;">¿Cuántas entrevistas desea realizar?</label>
+            <input type="number" id="total_entrevistas" min="1" value="1" class="form-control clave-input" style="margin: 10px 0 20px 0; max-width: 250px;">
+        `;
+
+        const btnIniciar = clonado.querySelector(".btn-iniciar");
+        btnIniciar.parentNode.insertBefore(inputEntrevistas, btnIniciar);
+
+        btnIniciar.addEventListener("click", function (e) {
+            const total = parseInt(document.getElementById("total_entrevistas").value);
+            if (isNaN(total) || total <= 0) {
+                e.preventDefault(); 
+                alert("Ingrese un número válido de entrevistas.");
+                return;
+            }
+
+            localStorage.setItem("total_entrevistas", total);
+            localStorage.setItem("entrevistas_realizadas", 0);
+        });
+
         empresaDiv.style.display = "block";
     }
 }
-</script>
-<!-- <script>
-  window.addEventListener("load", () => {
-    const preloader = document.getElementById("preloader");
-    if (preloader) {
-      preloader.classList.add("fade-out"); 
-      setTimeout(() => {
-        preloader.remove(); 
-      }, 1000); 
+
+
+function iniciarEncuestas(id) {
+    const total = parseInt(document.getElementById("total_entrevistas").value);
+    if (isNaN(total) || total <= 0) {
+        alert("Ingrese un número válido de entrevistas.");
+        return;
     }
-  });
-</script> -->
+    localStorage.setItem("total_entrevistas", total);
+    localStorage.setItem("entrevistas_realizadas", 0); 
+
+    const link = document.querySelector(`#empresa${id} .btn-iniciar`).getAttribute("href");
+    window.location.href = link;
+}
 
 
-
+</script>
 </body>
 </html>
