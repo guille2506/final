@@ -38,6 +38,7 @@ function obtenerOraciones($idempresa, $nro_bloque) {
     <link href="css/style.css" rel="stylesheet">
     <link href="css/vendors.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    
 </head>
 <body class="style_2">
 <div id="preloader"><div data-loader="circle-side"></div></div>

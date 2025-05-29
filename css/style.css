@@ -358,28 +358,21 @@ footer ul li a {
 footer ul li a:hover {
   color: #fff;
 }
+
 .wrapper_centering {
   width: 100%;
   margin: -90px auto 0;
-  height: 100%;
+  min-height: 100vh;
+  height: auto;
   text-align: left;
   clear: both;
-  display: table;
+  display: block;
   position: relative;
-  /* overflow: hidden; */
   z-index: 1;
-  background: -moz-linear-gradient(
-    165deg,
-    rgba(0, 0, 0, 0.7) 0%,
-    transparent 100%
-  );
-  background: -webkit-linear-gradient(
-    165deg,
-    rgba(0, 0, 0, 0.7) 0%,
-    transparent 100%
-  );
-  background: linear-gradient(165deg, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+  padding-bottom: 3rem;
+  background: transparent !important; /* Sin fondo para que se herede del body */
 }
+
 .container_centering {
   vertical-align: middle;
   display: table-cell;
@@ -1509,11 +1502,17 @@ body[dir="rtl"] .fl-form .fl-wrap-select:after {
   font-size: 14px;
   margin-bottom: 6px;
 }
-
 body.style_2 {
-  background: #2a4adb url(../images/pattern_3.svg) no-repeat center left;
+  background: 
+    linear-gradient(165deg, rgba(0, 0, 0, 0.7) 0%, transparent 100%), 
+    #2a4adb url(../images/pattern_3.svg) no-repeat center left;      
   background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  color: #fff;
 }
+
 
 .wrapper_centering.encuesta {
   padding: 40px 20px;
