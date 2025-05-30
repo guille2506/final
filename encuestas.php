@@ -87,6 +87,9 @@ function obtenerOraciones($idempresa, $nro_bloque) {
                             }
                             ?>
                         </ul> 
+                        <div id="contador-entrevistas" style="margin-top: 20px; font-size: 16px; font-weight: bold;">
+                            Entrevistas realizadas: <span id="realizadas">0</span> / <span id="total">0</span>
+                        </div>
                     </div>
                 </div>
                 <div class="col-xl-5 col-lg-5">
@@ -197,7 +200,14 @@ function obtenerOraciones($idempresa, $nro_bloque) {
 <script src="js/jquery-3.7.1.min.js"></script>
 <script src="js/common_scripts.min.js"></script>
 <script src="js/functions.js"></script>
-
+<script>
+function actualizarContador() {
+    const realizadas = parseInt(localStorage.getItem("entrevistas_realizadas") || "0");
+    const total = parseInt(localStorage.getItem("total_entrevistas") || "0");
+    document.getElementById("realizadas").textContent = realizadas;
+    document.getElementById("total").textContent = total;
+}
+</script>
 <script>
 function BuscarActivarSelect(id, data){
     if(id == "id_empresa"){
@@ -316,8 +326,11 @@ $(document).ready(function () {
         preloader.remove();
       }, 1000);
     }
+
+    actualizarContador();
   });
 </script>
+
 
 <script>
 document.getElementById("wrapped").addEventListener("submit", function (e) {
