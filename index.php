@@ -101,7 +101,7 @@ function obtenerAlumnos($idempresa) {
 
 
 <?php
-$empresas = ["Los Troncos", "Autoservicio Myriam", "Fase Electricidad", "Tienda Balbi"];
+$empresas = ["Tienda Balbi", "Los Troncos", "Autoservicio Myriam", "Fase Electricidad"];
 
 foreach ($empresas as $index => $empresa) {
     $id = $index + 1;
@@ -163,7 +163,7 @@ function mostrarEmpresa(id) {
         const inputEntrevistas = document.createElement("div");
         inputEntrevistas.id = "selector-entrevistas";
         inputEntrevistas.innerHTML = `
-            <label for="total_entrevistas" style="font-weight: bold; display: block;">¿Cuántas entrevistas desea realizar?</label>
+            <label for="total_entrevistas" style="font-weight: bold; display: block;">¿Cuántas encuestas desea realizar?</label>
             <input type="number" id="total_entrevistas" min="1" value="1" class="form-control clave-input" style="margin: 10px 0 20px 0; max-width: 250px;">
         `;
 

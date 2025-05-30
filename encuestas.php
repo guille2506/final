@@ -70,7 +70,7 @@ function obtenerOraciones($idempresa, $nro_bloque) {
                             Encuesta Clima Laboral
                         </h3>
                         <p>El objetivo de esta encuesta es identificar áreas de mejora en la empresa y aumentar la satisfacción del equipo. Sus respuestas son totalmente anónimas.</p>
-                        <p>ESCALA PARA RESPUESTAS</p> 
+                        <p>ESCALA DE RESPUESTAS</p> 
                         <ul style="list-style: none; padding-left: 0; margin-top: 1rem;">
                             <?php
                             $valor = -1;                            
@@ -102,7 +102,7 @@ function obtenerOraciones($idempresa, $nro_bloque) {
                             <input type="hidden" id="nombreempresa" value="<?= htmlspecialchars($nombre_empresa) ?>">
                             <div id="middle-wizard">
                                 <div class="step">
-                                    <h3 class="main_question"><strong>1</strong> Datos del encuestado</h3>
+                                    <h3 class="main_question"><strong>1</strong> DATOS DEL ENCUESTADO</h3>
                                     <?php
                                     function renderSelect($id, $label, $options) {
                                         echo "<div class='form-group'>";
@@ -172,8 +172,8 @@ function obtenerOraciones($idempresa, $nro_bloque) {
                                 }
                                 ?>
                                 <div class="step">
-                                    <h3 class="main_question">Toca ENVIAR para finalizar.</h3>
-                                    <p>¡Gracias por su participación!</p>
+                                    <h3 class="main_question">¡Gracias por su participación!</h3>
+                                    <p>Toca ENVIAR para finalizar.</p>
                                 </div>
                             </div>
                             <div id="bottom-wizard">
@@ -386,7 +386,7 @@ document.getElementById("wrapped").addEventListener("submit", function (e) {
                 alert("Encuesta guardada. A continuación, se abrirá una nueva entrevista.");
                 window.location.href = window.location.pathname + window.location.search;
             } else {
-                alert("¡Gracias! Se han completado todas las entrevistas.");
+                alert("¡Gracias! Se han completado todas las encuestas.");
                 localStorage.removeItem("total_entrevistas");
                 localStorage.removeItem("entrevistas_realizadas");
                 window.location.href = "index.php";
