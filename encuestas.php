@@ -126,6 +126,7 @@ function obtenerOraciones($idempresa, $nro_bloque) {
                                 <?php
                                 $nro_bloque = 0;
                                 $stepCount = 2;
+                                $text_area = false;
                                 $getBloques = $ques->getQuestions($id_empresa . '/csvfiles/bloques.csv');
                                 if ($getBloques) {
                                     foreach ($getBloques as $bloque) {
@@ -143,7 +144,11 @@ function obtenerOraciones($idempresa, $nro_bloque) {
                                                     $name = "bloque{$nro_bloque}_pregunta{$stepCount}_{$i}";
                                                     if (substr($oracion, -1) == "?") {
                                                         echo "<div class='form-group'><label>$oracion</label><textarea name='texta_$name' class='form-control required' rows='3' onchange='SetValueSession(this.name,this.value)'></textarea></div>";
-                                                    } else {
+                                                        $i = $i + 1;
+                                                        $name = "bloque{$nro_bloque}_pregunta{$stepCount}_{$i}";
+                                                        echo "<input type='radio' id='$id_radio' name='$name' value='-' disabled style='visibility:collapse;' checked>";
+                                                   
+                                                    }else {
                                                         echo "<div class='form-group'><label>$oracion</label><div class='review_block_smiles scrollable-smiles'><ul class='clearfix'>";
                                                         $valor = 0;
                                                         foreach ($ques->getScales($id_empresa . '/csvfiles/escalas.csv') as $escalas) {
@@ -192,6 +197,7 @@ function obtenerOraciones($idempresa, $nro_bloque) {
 <script src="js/jquery-3.7.1.min.js"></script>
 <script src="js/common_scripts.min.js"></script>
 <script src="js/functions.js"></script>
+
 <script>
 function BuscarActivarSelect(id, data){
     if(id == "id_empresa"){
@@ -218,7 +224,7 @@ function BuscarActivarOption(id,data){
     elem[0].setAttribute("checked","checked");
 }
 function BuscarActivarTextArea(id,data){
-    elem = document.querySelectorAll("#"+id);
+    elem = document.getElementsByName(id);
     elem[0].value = data
 }
 function setDataForms(){
@@ -234,7 +240,6 @@ function setDataForms(){
         .then(result => {
         optionData = result.data;
         
-        console.log(optionData)
         var filasArr = optionData.split("//");
         var arrAllData = [];
         filasArr.forEach(element => { 
@@ -251,6 +256,7 @@ function setDataForms(){
         });
     });
 }
+
 $(document).ready(function () {
     let currentStep = 0;
     const steps = $(".step");
@@ -384,11 +390,14 @@ document.getElementById("wrapped").addEventListener("submit", function (e) {
 
             if (realizadas < total) {
                 alert("Encuesta guardada. A continuación, se abrirá una nueva entrevista.");
+                <?php $s->destroySession(); ?>
                 window.location.href = window.location.pathname + window.location.search;
+                
             } else {
                 alert("¡Gracias! Se han completado todas las entrevistas.");
                 localStorage.removeItem("total_entrevistas");
                 localStorage.removeItem("entrevistas_realizadas");
+                <?php $s->destroySession(); ?>
                 window.location.href = "index.php";
             }
 
@@ -397,6 +406,17 @@ document.getElementById("wrapped").addEventListener("submit", function (e) {
 });
 
 </script>
+<script>
+    
+function SetValueSession(id,data){
+const formData = new FormData();
+    formData.append('s', id +"-"+ data);
 
+    fetch('classes/Session.php', {
+        method: 'POST',
+        body: formData
+    });   
+}
+</script>
 </body>
 </html>

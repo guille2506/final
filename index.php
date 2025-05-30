@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="css/style.css"> 
 </head>
 <?php
-session_start();
+include_once("classes/Session.php");
+$s = new user_session;
+$s->destroySession();
 error_reporting(0);
 function obtenerDatosEmpresa($id) {
     $archivo = fopen("csvfiles/empresas.csv", "r");

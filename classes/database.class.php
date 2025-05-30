@@ -3,8 +3,8 @@ class DataBase{
 
 	private $BaseDatos = 'cervantes2025';
 	private $Servidor = 'localhost';
-	private $Usuario = 'daniel';
-	private $Clave = 'nelebairam1363';
+	private $Usuario = 'root';
+	private $Clave = '';
 
 	function Conexion() {
 		$mysqli = new mysqli($this->Servidor, $this->Usuario, $this->Clave, $this->BaseDatos);

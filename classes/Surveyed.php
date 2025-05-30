@@ -90,8 +90,6 @@ class Surveyed{
         $r = $objDB->Insert('encuestados', $aux);
         
         $_SESSION["idencuestado"] = $r['insert_id'];
-        // $s = new user_session;
-        // $s->deleteinfo();
     }
 }
 ?>
