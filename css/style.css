@@ -59,9 +59,16 @@ strong {
   font-weight: 500;
 }
 label {
-  font-weight: 400;
+   font-weight: 400;
   margin-bottom: 3px;
-  color: #ccc;
+  display: inline-block;
+  font-weight: 400;
+  margin-bottom: 8px;
+  color: #000000;
+  background-color: #ffffff7e;
+  padding: 8px 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  font-size: 18px;
 }
 hr {
   margin: 30px 0 30px 0;
@@ -142,7 +149,7 @@ a.btn_1,
 .btn_1 {
   border: none;
   color: #fff;
-  background: #434bdf;
+  background: #000000;
   outline: none;
   cursor: pointer;
   display: inline-block;
@@ -1562,7 +1569,7 @@ body.style_2 {
 
 .index-box button.btn_1 {
   width: 100%;
-  background-color: #434bdf;
+  background-color: #000000;
   color: white;
   font-weight: bold;
   padding: 12px;
@@ -1572,7 +1579,7 @@ body.style_2 {
 }
 
 .index-box button.btn_1:hover {
-  background-color: #4ccd6a;
+  background-color: #3d2ee2;
 }
 
 .index-box small#creditos {
@@ -1600,7 +1607,7 @@ body.style_2 {
 
 .btn-iniciar {
   width: 100%;
-  background-color: #434bdf;
+  background-color: #000000;
   color: white;
   font-weight: bold;
   padding: 12px;
@@ -1610,7 +1617,7 @@ body.style_2 {
 }
 
 .btn-iniciar:hover {
-  background-color: #4ccd6a;
+  background-color: #434bdf;
 }
 
 .container_centering,
@@ -1720,3 +1727,7 @@ body.style_2 {
   }
 }
 
+.fl-label {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
