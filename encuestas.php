@@ -1,6 +1,7 @@
 <?php
 include_once("classes/Session.php");
 $s = new user_session;
+
 error_reporting(0);
 // $s->destroySession();
 
@@ -250,6 +251,7 @@ function setDataForms(){
         .then(result => {
         optionData = result.data;
         
+
         var filasArr = optionData.split("//");
         var arrAllData = [];
         filasArr.forEach(element => { 
@@ -409,7 +411,7 @@ document.getElementById("wrapped").addEventListener("submit", function (e) {
                 alert("¡Gracias! Se han completado todas las encuestas.");
                 localStorage.removeItem("total_entrevistas");
                 localStorage.removeItem("entrevistas_realizadas");
-                <?php $s->destroySession(); ?>
+                
                 window.location.href = "index.php";
             }
 
