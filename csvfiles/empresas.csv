@@ -1,6 +1,5 @@
-id_empresa,Nombre,Clave,Logo,Alumnos
-1,AGC,1,images\logo_AGC1.png,Grupo 1
-2,LosTroncos,2,images\logo_lostroncos.png,Grupo 2
-3,Castellanas,3,images\logo_Castellanas1.png,Grupo 3
-4,Gaudium,4,images\logo_Gaudium1.png,Grupo 4
-5,DelParque,5,images\logo_DelParque1.png,Grupo 5
+id_empresa,Nombre,Clave,Logo,LogoConsultora,Alumnos
+1,Balbi,sevilla,images\LogoBalbi.png,images\MALAV.jpg,Grupo 1
+2,LosTroncos,valencia,images\LOGOLOSTRONCOS.png,images\ZENTHRA.jpg,Grupo 2
+3,AutoservicioMyriam,barcelona,images\logo_Myriam.jpg,images\InNexo.jpg,Grupo 3
+4,FaseElectricidad,madrid,images\logoFase.jpeg,images\NEXUS.jpg,Grupo 4

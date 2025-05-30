@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Encuestas Integración V6</title>
+    <title>Encuestas Integración V7.0.2</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"> <!-- dejar este primero para que cargue despues los estilos tk -->
     <link rel="stylesheet" href="css/style.css"> 
@@ -20,7 +20,8 @@ function obtenerDatosEmpresa($id) {
                 return [
                     'nombre' => $datos[1],
                     'logo' => $datos[3],
-                    'alumnos' => $datos[4]
+                    'logoConsultora' => $datos[4],
+                    'alumnos' => $datos[5]
                 ];
             }
         }
@@ -74,7 +75,7 @@ function obtenerAlumnos($idempresa) {
             <div class="index-box" id="contrasena_container">
               <form class="form" onsubmit="event.preventDefault(); verificarClave();">
                 <img src="images/Logo2.png" alt="Logo" style="height: 100px; margin-bottom: 20px;">
-                <h3>Encuestas Clima Laboral</h3>
+                <h3> <small>Encuestas Clima Laboral <sub>V7.0.2</sub></small></h3>
 
                 <input required type="password" id="clave" class="form-control clave-input" placeholder="Contraseña de la Empresa">
 
@@ -100,7 +101,7 @@ function obtenerAlumnos($idempresa) {
 
 
 <?php
-$empresas = ["AGC", "Los Troncos", "Castellanas", "Gaudium", "DelParque"];
+$empresas = ["Los Troncos", "Autoservicio Myriam", "Fase Electricidad", "Tienda Balbi"];
 
 foreach ($empresas as $index => $empresa) {
     $id = $index + 1;
@@ -115,7 +116,7 @@ foreach ($empresas as $index => $empresa) {
             if ($i > 0) echo '<li>' . htmlspecialchars($alumno) . '</li>';
         }
         echo '</ul><hr>';
-        echo '<a class="btn-iniciar" href="encuestas.php?id=' . $id . '&nombre=' . $empresa . '&logo=' . $datos['logo'] . '">Iniciar Encuesta <small><sup>V6.2</sup></small></a>';
+        echo '<a class="btn-iniciar" href="encuestas.php?id=' . $id . '&nombre=' . $empresa . '&logo=' . $datos['logo'] . '&logoConsultora=' . $datos['logoConsultora'].'">Iniciar Encuesta <small><sup>V7.0.2</sup></small></a>';
         echo '</div>';
     }
 }

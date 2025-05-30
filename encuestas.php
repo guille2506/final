@@ -7,6 +7,9 @@ error_reporting(0);
 $id_empresa = $_GET["id"];
 $nombre_empresa = $_GET["nombre"];
 $logo_empresa = $_GET["logo"];
+$logo_consultora = $_GET["logoConsultora"];
+$colores = ['color: red;','color: orange;','color: gold;','color: lightgreen;','color: green;'];
+$emojies = ['😠','😕','😐','🙂','😄'];
 
 include_once ('classes/Questions.php');
 include_once ('classes/Surveyed.php');
@@ -57,16 +60,33 @@ function obtenerOraciones($idempresa, $nro_bloque) {
             <div class="row justify-content-between">
                 <div class="col-xl-6 col-lg-6 d-flex align-items-center">
                     <div class="main_title_1">
-                        <h3><img src="images/recursos-logo11.png" width="80" height="80" alt=""> Encuesta de satisfacción</h3>
+                        <h3>
+                        <!-- Logo consultora de recursos humanos -->
+                        <?php if (!empty($logo_consultora)): ?>
+                            <div style="margin: 10px 0;">
+                                <img src="<?= htmlspecialchars($logo_consultora) ?>" alt="Logo Consultora" style="max-height: 80px;">
+                            </div>
+                        <?php endif; ?>
+                            Encuesta Clima Laboral
+                        </h3>
                         <p>El objetivo de esta encuesta es identificar áreas de mejora en la empresa y aumentar la satisfacción del equipo. Sus respuestas son totalmente anónimas.</p>
-                        <p><em>- Equipo del Instituto Cervantes</em></p>
+                        <p>ESCALA PARA RESPUESTAS</p> 
                         <ul style="list-style: none; padding-left: 0; margin-top: 1rem;">
-                            <li><strong style="color: red;">😠 NUNCA</strong></li>
-                            <li><strong style="color: orange;">😕 RARA VEZ</strong></li>
-                            <li><strong style="color: gold;">😐 A VECES</strong></li>
-                            <li><strong style="color: lightgreen;">🙂 CASI SIEMPRE</strong></li>
-                            <li><strong style="color: green;">😄 SIEMPRE</strong></li>
-                        </ul>
+                            <?php
+                            $valor = -1;                            
+                            $getData2 = $ques->getScales($id_empresa . '/csvfiles/escalas.csv');
+                            foreach ($getData2 as $arrayescalas) {
+                                foreach ($arrayescalas as $escala) {
+                                    $valor++;
+                                    ?>
+                                    <li><strong style="<?= htmlspecialchars($colores[$valor]) ?>">
+                                        <?= htmlspecialchars($emojies[$valor]) ?>  
+                                        <?= htmlspecialchars(strtoupper($escala)) ?></strong></li>
+                                    <?php
+                                }
+                            }
+                            ?>
+                        </ul> 
                     </div>
                 </div>
                 <div class="col-xl-5 col-lg-5">
@@ -129,14 +149,19 @@ function obtenerOraciones($idempresa, $nro_bloque) {
                                                         foreach ($ques->getScales($id_empresa . '/csvfiles/escalas.csv') as $escalas) {
                                                             foreach ($escalas as $escala) {
                                                                 $valor++;
+                                                                if ($valor == 1) {$primera=$escala;} if ($valor == 5) {$ultima=$escala;} 
                                                                 $id_radio = "{$name}_{$valor}";
                                                                 echo "<li><div class='container_smile'>";
-                                                                echo "<input type='radio' id='$id_radio' name='$name' value='$valor' class='required' onchange='SetValueSession(this.id,this.value)'>";
+                                                                echo "<input type='radio' id='$id_radio' name='$name' value='$valor' 
+                                                                class='required' onchange='SetValueSession(this.id,this.value)'>";
                                                                 echo "<label class='radio smile_$valor' for='$id_radio'><span>$escala</span></label>";
                                                                 echo "</div></li>";
                                                             }
                                                         }
-                                                        echo "</ul><div class='row justify-content-between add_bottom_25'><div class='col-4'><em>NUNCA</em></div><div class='col-4 text-end'><em>SIEMPRE</em></div></div></div></div>";
+                                                        echo "</ul><div class='row justify-content-between add_bottom_25'>
+                                                        <div class='col-4'><em>".$primera."</em></div>
+                                                        <div class='col-4 text-end'><em>".$ultima."</em></div>
+                                                        </div></div></div>";
                                                     }
                                                 }
                                                 echo "</div>";
@@ -310,6 +335,8 @@ document.getElementById("wrapped").addEventListener("submit", function (e) {
         const bloquesRespuestas = {};
         const pasos = document.querySelectorAll(".step");
 
+        //console.log(pasos);
+
         pasos.forEach((bloque) => {
             const titulo = bloque.querySelector("h3.main_question")?.textContent.trim() || "";
             const match = titulo.match(/^\d+\s+(.*)/);
@@ -364,6 +391,7 @@ document.getElementById("wrapped").addEventListener("submit", function (e) {
                 localStorage.removeItem("entrevistas_realizadas");
                 window.location.href = "index.php";
             }
+
         });
     });
 });

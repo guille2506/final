@@ -1,12 +1,10 @@
 <?php
 class DataBase{
 
-	private $BaseDatos = 'test';
+	private $BaseDatos = 'cervantes2025';
 	private $Servidor = 'localhost';
-	private $Usuario = 'root';
-	private $Clave = '';
-
-
+	private $Usuario = 'daniel';
+	private $Clave = 'nelebairam1363';
 
 	function Conexion() {
 		$mysqli = new mysqli($this->Servidor, $this->Usuario, $this->Clave, $this->BaseDatos);
