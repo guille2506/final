@@ -321,6 +321,7 @@ $(document).ready(function () {
 
 <script>
 document.getElementById("wrapped").addEventListener("submit", function (e) {
+    alert("Encuesta guardada. A continuación, se abrirá una nueva entrevista.");
     e.preventDefault();
 
     const datos = {
@@ -389,8 +390,6 @@ document.getElementById("wrapped").addEventListener("submit", function (e) {
             window.onbeforeunload = null;
 
             if (realizadas < total) {
-                alert("Encuesta guardada. A continuación, se abrirá una nueva entrevista.");
-                <?php $s->destroySession(); ?>
                 window.location.href = window.location.pathname + window.location.search;
                 
             } else {
