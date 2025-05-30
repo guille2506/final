@@ -172,8 +172,8 @@ function obtenerOraciones($idempresa, $nro_bloque) {
                                 }
                                 ?>
                                 <div class="step">
-                                    <h3 class="main_question">¡Gracias por su participación!</h3>
-                                    <p>Redirigiendo en <span id="countdown">5</span> segundos...</p>
+                                    <h3 class="main_question">Toca ENVIAR para finalizar.</h3>
+                                    <p>¡Gracias por su participación!</p>
                                 </div>
                             </div>
                             <div id="bottom-wizard">
