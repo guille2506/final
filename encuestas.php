@@ -72,21 +72,31 @@ function obtenerOraciones($idempresa, $nro_bloque) {
     fetch("get_empresa.php?clave=" + encodeURIComponent(clave))
       .then(response => response.json())
       .then(data => {
+        console.log("Respuesta de get_empresa.php:", data);
+
         if (data.encontrado) {
+          const idEmpresaUrl = new URLSearchParams(window.location.search).get("id");
+
+          if (String(data.empresa) !== String(idEmpresaUrl)) {
+            mensaje.textContent = "La clave no corresponde a esta empresa.";
+            mensaje.style.display = "block";
+            return;
+          }
+
           document.getElementById("popup_clave").style.display = "none";
-
           localStorage.setItem("id_empresa", data.empresa);
-
         } else {
           mensaje.style.display = "block";
         }
       })
-      .catch(() => {
+      .catch((error) => {
+        console.error("Error al verificar la clave:", error);
         mensaje.textContent = "Error al verificar la clave.";
         mensaje.style.display = "block";
       });
   }
 </script>
+
 
 
 <div id="preloader"><div data-loader="circle-side"></div></div>
