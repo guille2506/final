@@ -134,14 +134,15 @@ function obtenerOraciones($idempresa, $nro_bloque) {
                                 <?php
                                 $nro_bloque = 0;
                                 $stepCount = 2;
-                                $text_area = false;
                                 $getBloques = $ques->getQuestions($id_empresa . '/csvfiles/bloques.csv');
                                 if ($getBloques) {
                                     foreach ($getBloques as $bloque) {
                                         foreach ($bloque as $titulo) {
                                             $nro_bloque++;
                                             $oraciones = obtenerOraciones($id_empresa, $nro_bloque);
+                                            
                                             $oraciones = array_slice($oraciones, 1);
+                                           
                                             $chunked = array_chunk($oraciones,8);
                                             foreach ($chunked as $grupo) {
                                                 echo "<div class='step'>";
@@ -151,11 +152,14 @@ function obtenerOraciones($idempresa, $nro_bloque) {
                                                     $i++;
                                                     $name = "bloque{$nro_bloque}_pregunta{$stepCount}_{$i}";
                                                     if (substr($oracion, -1) == "?") {
+                                                        
                                                         echo "<div class='form-group'><label>$oracion</label><textarea name='texta_$name' class='form-control required' rows='3' onchange='SetValueSession(this.name,this.value)'></textarea></div>";
+                                                        
+                                                        
                                                         $i = $i + 1;
                                                         $name = "bloque{$nro_bloque}_pregunta{$stepCount}_{$i}";
                                                         echo "<input type='radio' id='$id_radio' name='$name' value='-' disabled style='visibility:collapse;' checked>";
-                                                   
+                                                        
                                                     }else {
                                                         echo "<div class='form-group'><label>$oracion</label><div class='review_block_smiles scrollable-smiles'><ul class='clearfix'>";
                                                         $valor = 0;
@@ -384,6 +388,10 @@ document.getElementById("wrapped").addEventListener("submit", function (e) {
         });
 
         const promesas = Object.entries(bloquesRespuestas).map(([nombreBloque, datosBloque]) => {
+            
+            if(nombreBloque == "DATOS DEL ENCUESTADO"){
+                return;
+            }
             return fetch("saveAnswers.php", {
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
