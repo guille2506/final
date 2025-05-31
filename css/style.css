@@ -1737,3 +1737,11 @@ textarea[name^="texta_"] {
   resize: vertical;
 }
 
+@media (max-width: 767px) {
+  .main_title_1 img {
+    display: block !important;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto 10px;
+  }
+}
