@@ -85,7 +85,7 @@ function obtenerAlumnos($idempresa) {
                 <p id="mensaje" style="color: red;"></p>
 
                 <small id="creditos">
-                  Tecnicatura Superior en Recursos Humanos<br>
+                  Tecnicatura en Recursos Humanos<br>
                   Tecnicatura en Desarrollo de Software
                 </small>
               </form>
