@@ -124,7 +124,7 @@ function obtenerOraciones($idempresa, $nro_bloque) {
                                     renderSelect('sexo', 'Género', $fun->leergeneros($id_empresa.'/csvfiles/generos.csv'));
                                     renderSelect('edad', 'Edad', $fun->leeredades($id_empresa.'/csvfiles/edades.csv'));
                                     if ($id_empresa == 3) {
-                                        echo "<input type='hidden' id='area' name='area' value='-'>";
+                                        echo "<input type='hidden' id='area' name='area' value='Dato Comprometido'>";
                                     } else {
                                         renderSelect('area', 'Área', $fun->leerareas($id_empresa.'/csvfiles/areas.csv'));
                                     }
