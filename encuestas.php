@@ -70,7 +70,8 @@ function obtenerOraciones($idempresa, $nro_bloque) {
                         <?php endif; ?>
                             Encuesta Clima Laboral
                         </h3>
-                        <p>El objetivo de esta encuesta es identificar áreas de mejora en la empresa y aumentar la satisfacción del equipo. Sus respuestas son totalmente anónimas.</p>
+                        <p>Esta encuesta forma parte de un trabajo colaborativo realizado por estudiantes del Instituto Cervantes de las Tecnicaturas en Gestión de Recursos Humanos y de la Tecnicatura en Gestión de Software.</p>
+                        <p style='font-weight: bold;'>Todas las encuestas son completamente anónimas.</p>
                         <p>ESCALA DE RESPUESTAS</p> 
                         <ul style="list-style: none; padding-left: 0; margin-top: 1rem;">
                             <?php
@@ -123,7 +124,7 @@ function obtenerOraciones($idempresa, $nro_bloque) {
                                     renderSelect('sexo', 'Género', $fun->leergeneros($id_empresa.'/csvfiles/generos.csv'));
                                     renderSelect('edad', 'Edad', $fun->leeredades($id_empresa.'/csvfiles/edades.csv'));
                                     if ($id_empresa == 3) {
-                                        echo "<input type='hidden' id='area' name='area' value='-'>";
+                                        echo "<input type='hidden' id='area' name='area' value='Dato Comprometido'>";
                                     } else {
                                         renderSelect('area', 'Área', $fun->leerareas($id_empresa.'/csvfiles/areas.csv'));
                                     }
@@ -420,7 +421,7 @@ document.getElementById("wrapped").addEventListener("submit", function (e) {
                 window.location.href = window.location.pathname + window.location.search;
                 
             } else {
-                alert("¡Gracias! Se han completado todas las encuestas.");
+                alert("¡Gracias por tu tiempo y por participar en esta encuesta! Podés avisar al equipo de Recursos Humanos que ya la has finalizado.");
                 localStorage.removeItem("total_entrevistas");
                 localStorage.removeItem("entrevistas_realizadas");
                 
