@@ -124,7 +124,7 @@ function obtenerOraciones($idempresa, $nro_bloque) {
                         <?php endif; ?>
                             Encuesta Clima Laboral
                         </h3>
-                        <p>Esta encuesta forma parte de un trabajo colaborativo realizado por estudiantes del Instituto Cervantes de las Tecnicaturas en Gestión de Recursos Humanos y de la Tecnicatura en Gestión de Software.</p>
+                        <p>Esta encuesta forma parte de un trabajo colaborativo realizado por estudiantes del Instituto Cervantes, pertenecientes a las Tecnicaturas en Gestión de Recursos Humanos y Desarrollo de Software.</p>
                         <p style='font-weight: bold;'>Todas las encuestas son completamente anónimas.</p>
                         <p>ESCALA DE RESPUESTAS</p> 
                         <ul style="list-style: none; padding-left: 0; margin-top: 1rem;">
