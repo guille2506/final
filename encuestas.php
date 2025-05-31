@@ -45,6 +45,50 @@ function obtenerOraciones($idempresa, $nro_bloque) {
     
 </head>
 <body class="style_2">
+<div id="popup_clave" class="popup_fondo">
+  <div class="popup_contenido">
+    <div class="popup_logo">
+      <?php if (!empty($logo_empresa)): ?>
+        <img src="<?= htmlspecialchars($logo_empresa) ?>" alt="Logo Empresa" style="max-height: 100px;">
+      <?php endif; ?>
+    </div>
+    <h4>Ingrese la clave de acceso</h4>
+    <input type="password" id="clave_acceso" class="form-control" placeholder="Clave" />
+    <button class="btn btn-primary mt-3" onclick="verificarClave()">Ingresar</button>
+    <p id="error_clave" style="color:red; display:none; margin-top:10px;">Clave incorrecta. Intente nuevamente.</p>
+  </div>
+</div>
+
+<script>
+  window.addEventListener("load", () => {
+    document.getElementById("popup_clave").style.display = "flex";
+    document.getElementById("clave_acceso").focus();
+  });
+
+  function verificarClave() {
+    const clave = document.getElementById("clave_acceso").value.trim();
+    const mensaje = document.getElementById("error_clave");
+
+    fetch("get_empresa.php?clave=" + encodeURIComponent(clave))
+      .then(response => response.json())
+      .then(data => {
+        if (data.encontrado) {
+          document.getElementById("popup_clave").style.display = "none";
+
+          localStorage.setItem("id_empresa", data.empresa);
+
+        } else {
+          mensaje.style.display = "block";
+        }
+      })
+      .catch(() => {
+        mensaje.textContent = "Error al verificar la clave.";
+        mensaje.style.display = "block";
+      });
+  }
+</script>
+
+
 <div id="preloader"><div data-loader="circle-side"></div></div>
 <header>
     <div class="container">
@@ -444,5 +488,33 @@ const formData = new FormData();
     });   
 }
 </script>
+
+
+<style>
+.popup_fondo {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0,0,0,0.6);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup_contenido {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+}
+
+.popup_contenido input {
+  width: 100%;
+  padding: 10px;
+}
+</style>
+
 </body>
 </html>
