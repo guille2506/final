@@ -103,7 +103,7 @@ function obtenerAlumnos($idempresa) {
 
 
 <?php
-$empresas = ["Tienda Balbi", "Los Troncos", "Autoservicio Myriam", "Fase Electricidad"];
+$empresas = ["Los Troncos", "Autoservicio Myriam", "Fase Electricidad", "Tienda Balbi"];
 
 foreach ($empresas as $index => $empresa) {
     $id = $index + 1;
@@ -112,7 +112,7 @@ foreach ($empresas as $index => $empresa) {
         echo '<div id="empresa' . $id . '" style="display:none">';
         echo '<h2 class="bienvenidos">Bienvenidos a ' . $empresa . '</h2>';
         echo '<img src="' . $datos['logo'] . '" alt="Logo" class="img-fluid mb-3" height="100">';
-        echo '<h5 class="equipo-trabajo">Equipo de trabajo:</h5><ul>';
+        echo '<h4 class="equipo-trabajo">Equipo de trabajo</h4><ul>';
         $alumnos = obtenerAlumnos($id);
         foreach ($alumnos as $i => $alumno) {
             if ($i > 0) echo '<li>' . htmlspecialchars($alumno) . '</li>';

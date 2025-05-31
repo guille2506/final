@@ -1731,3 +1731,9 @@ body.style_2 {
   opacity: 1 !important;
   visibility: visible !important;
 }
+
+textarea[name^="texta_"] {
+  min-height: 100px;
+  resize: vertical;
+}
+
