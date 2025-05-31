@@ -203,7 +203,7 @@ function obtenerOraciones($idempresa, $nro_bloque) {
                                                         
                                                         $i = $i + 1;
                                                         $name = "bloque{$nro_bloque}_pregunta{$stepCount}_{$i}";
-                                                        echo "<input type='radio' id='$id_radio' name='$name' value='-' disabled style='visibility:collapse;' checked>";
+                                                        echo "<input type='radio' id='dis_$id_radio' name='$name' value='-' disabled style='visibility:collapse;' checked>";
                                                         
                                                     }else {
                                                         echo "<div class='form-group'><label>$oracion</label><div class='review_block_smiles scrollable-smiles'><ul class='clearfix'>";
